@@ -12,6 +12,7 @@ class TeamMember extends StatelessWidget {
         child: Scaffold(
       appBar: AppBar(
         title: Text("Team Members"),
+        automaticallyImplyLeading: false,
       ),
       body: Column(
         children: const [

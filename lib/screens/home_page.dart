@@ -15,6 +15,7 @@ class _HomePageState extends State<HomePage> {
         child: Scaffold(
       appBar: AppBar(
         title: const Text("Nutrious Website"),
+        automaticallyImplyLeading: false,
       ),
       body: Column(
         children: const [
