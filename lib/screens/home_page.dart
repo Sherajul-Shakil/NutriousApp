@@ -19,7 +19,10 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: const [
           Spacer(),
-          NavBar(),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 200),
+            child: NavBar(),
+          ),
         ],
       ),
     ));

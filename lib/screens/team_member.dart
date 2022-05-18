@@ -17,7 +17,10 @@ class TeamMember extends StatelessWidget {
         children: const [
           Text("This is Team member page"),
           Spacer(),
-          NavBar(),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 200),
+            child: NavBar(),
+          ),
         ],
       ),
     ));
