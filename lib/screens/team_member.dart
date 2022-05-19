@@ -12,6 +12,8 @@ class TeamMember extends StatelessWidget {
         child: Scaffold(
       appBar: AppBar(
         title: Text("Team Members"),
+        centerTitle: true,
+        backgroundColor: Color(0xFFEB1555),
         automaticallyImplyLeading: false,
       ),
       body: Column(

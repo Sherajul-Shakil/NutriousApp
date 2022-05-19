@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:nutrious_web_app/screens/bmi/screens/input_page.dart';
+import 'package:nutrious_web_app/screens/bmr/screens/input_page.dart';
 import 'package:nutrious_web_app/screens/home_page.dart';
 import 'package:nutrious_web_app/screens/team_member.dart';
-import 'package:nutrious_web_app/screens/bmi/main_bmi.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
@@ -81,7 +81,7 @@ class _NavBarState extends State<NavBar> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const TeamMember()),
+                    MaterialPageRoute(builder: (context) => InputPageBMR()),
                   );
                 },
               ),
