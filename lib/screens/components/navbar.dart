@@ -3,6 +3,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:nutrious_web_app/screens/bmi/screens/input_page.dart';
 import 'package:nutrious_web_app/screens/bmr/screens/input_page.dart';
 import 'package:nutrious_web_app/screens/home_page.dart';
+import 'package:nutrious_web_app/screens/nutrient/search_page.dart';
 import 'package:nutrious_web_app/screens/team_member.dart';
 
 class NavBar extends StatefulWidget {
@@ -57,11 +58,11 @@ class _NavBarState extends State<NavBar> {
               ),
               GButton(
                 icon: Icons.favorite_outline,
-                text: 'Nutrition',
+                text: 'Nutrient',
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const TeamMember()),
+                    MaterialPageRoute(builder: (context) => const SearchPage()),
                   );
                 },
               ),
