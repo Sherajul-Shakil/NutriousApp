@@ -3,9 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrious_web_app/model/nutrition_data.dart';
 import 'package:nutrious_web_app/screens/components/navbar.dart';
 import 'package:nutrious_web_app/screens/nutrient/constants.dart';
-import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:nutrious_web_app/screens/nutrient/result.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -94,11 +94,6 @@ class _SearchPageState extends State<SearchPage> {
                               'https://nutritionapiv2.herokuapp.com/test/q?name=' +
                                   nameController.text));
                           if (response.statusCode == 200) {
-                            // final parsedData = jsonDecode(response.body);
-
-                            // print(parsedData.toString());
-                            //   print(valueHolder.items!.single.name.toString());
-                            //print('\n\n\nHere:' + parsedData.data!.name);
                             final nutritionData =
                                 nutritionDataV2FromJson(response.body);
 
@@ -108,8 +103,6 @@ class _SearchPageState extends State<SearchPage> {
                               });
                             }
                             valueHolder = nutritionData;
-                            // print('Repo Print ${nutritionData.toString()}');
-                            //  return nutritionData;
                           } else if (response.statusCode == 404) {
                             throw Failure(
                                 failureMessage: 'Not Found any data!');
@@ -122,93 +115,12 @@ class _SearchPageState extends State<SearchPage> {
                               failureMessage: 'Check Internet Connection!');
                         }
 
-                        // await ref
-                        //     .watch(
-                        //         nutritionStateNotifierProviderV1.notifier)
-                        //     .getNutritionData(nameController.text.trim());
-                        // v1Data.maybeWhen(
-                        //   success: (d) {
-                        // sugar = d.items!.single.sugarG;
-                        // fiber = d.items!.single.fiberG;
-                        // size = d.items!.single.servingSizeG;
-                        // sodium = d.items!.single.sodiumMg;
-                        // name = d.items!.single.name;
-                        // fatSaturated = d.items!.single.fatSaturatedG;
-                        // fatTotal = d.items!.single.fatTotalG;
-                        // calories = d.items!.single.calories;
-                        // cholesterol = d.items!.single.cholesterolMg;
-                        // protein = d.items!.single.proteinG;
-                        // carbohydrate =
-                        //     d.items!.single.carbohydratesTotalG;
-                        // potassium = d.items!.single.potassiumMg;
-
-                        return showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                content: SingleChildScrollView(
-                                  child: isLoading
-                                      ? CircularProgressIndicator()
-                                      : Column(
-                                          children: [
-                                            Text(
-                                              'Name: ${valueHolder.data?.name ?? 'Something Error Happend!!'}',
-                                              style: GoogleFonts.breeSerif(
-                                                  fontSize: 20),
-                                            ),
-                                            Container(
-                                              height: 1,
-                                              color: Colors.grey,
-                                            ),
-
-                                            Text(
-                                              'Protein: ${valueHolder.data?.generalItems?.elementAt(3)} g',
-                                              style: GoogleFonts.breeSerif(
-                                                  fontSize: 18),
-                                            ),
-                                            Text(
-                                              'Carbohydrate: ${valueHolder.data?.generalItems?.elementAt(0)} g',
-                                              style: GoogleFonts.breeSerif(
-                                                  fontSize: 18),
-                                            ),
-                                            Text(
-                                              'Fiber: ${valueHolder.data?.generalItems?.elementAt(2)} g',
-                                              style: GoogleFonts.breeSerif(
-                                                  fontSize: 18),
-                                            ),
-                                            Text(
-                                              'Cholesterol: ${valueHolder.data?.generalItems?.elementAt(10)} mg',
-                                              style: GoogleFonts.breeSerif(
-                                                  fontSize: 18),
-                                            ),
-                                            Text(
-                                              'Fat Saturated: ${valueHolder.data?.generalItems?.elementAt(4)} g',
-                                              style: GoogleFonts.breeSerif(
-                                                  fontSize: 18),
-                                            ),
-
-                                            Text(
-                                              'Sodium: ${valueHolder.data?.mineralItems?.elementAt(4)} mg',
-                                              style: GoogleFonts.breeSerif(
-                                                  fontSize: 18),
-                                            ),
-                                            // Text(
-                                            //   'Potassium: ${valueHolder.items!.single.cholesterol!.toString()} Mg',
-                                            //   style:
-                                            //       GoogleFonts.breeSerif(fontSize: 18),
-                                            // ),
-                                          ],
-                                        ),
-                                ),
-                              );
-                            });
-
-                        // },
-                        // loading: () => CircularProgressIndicator(),
-                        // orElse: () {
-                        //   print('OrElse');
-                        // },
-                        //);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ResultPage(valueHolder: valueHolder)),
+                        );
                       },
                       splashColor: Colors.transparent,
                       icon: const Icon(Icons.search),
@@ -235,4 +147,85 @@ class Failure {
 
   Failure({required this.failureMessage});
   //print(failureMessage);
+}
+
+class DetailItem extends StatelessWidget {
+  const DetailItem({
+    Key? key,
+    required this.title,
+    required this.tColor,
+    required this.loopMax,
+    required this.data,
+    required this.avatarOn,
+  }) : super(key: key);
+  final String title;
+  final Color tColor;
+  final int? loopMax;
+  final List<Item>? data;
+  final bool avatarOn;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15),
+        child: ExpansionTile(
+          textColor: Colors.black,
+          title: Container(
+            child: Row(
+              textBaseline: TextBaseline.ideographic,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              children: [
+                CircleAvatar(
+                  backgroundColor: tColor,
+                  radius: 15,
+                ),
+                SizedBox(width: 15),
+                Text(
+                  title,
+                  style: GoogleFonts.breeSerif(fontSize: 20),
+                )
+              ],
+            ),
+          ),
+          expandedAlignment: Alignment.centerLeft,
+          collapsedBackgroundColor: Colors.white,
+          childrenPadding:
+              const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+          children: [
+            for (int i = 0; i < loopMax!; i++)
+              ListTile(
+                leading: avatarOn
+                    ? CircleAvatar(
+                        backgroundColor: Colors.black87,
+                        radius: 18,
+                        child: Text(
+                          data![i].nutrientName!.toString().split(',').last,
+                          style: GoogleFonts.breeSerif(color: Colors.white),
+                        ),
+                      )
+                    : SizedBox(height: 2, width: 2),
+                title: Text(
+                  data![i].nutrientName!.toString(),
+                  style: GoogleFonts.breeSerif(
+                    fontSize: 18,
+                  ),
+                ),
+                trailing: Text(
+                  '${data![i].nutrientValue!.toString()} ${(Unit.values[data![i].unit!.index]).toString().split('.').last.toLowerCase()}',
+                  style: GoogleFonts.breeSerif(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
 }

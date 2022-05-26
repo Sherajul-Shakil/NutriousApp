@@ -39,6 +39,9 @@ dependencies:
   google_fonts: ^2.1.0
   http: ^0.13.4
   freezed_annotation: ^0.14.2
+  percent_indicator: "^3.4.0"
+  flutter_riverpod: ^1.0.0
+  
   
 
 dev_dependencies:

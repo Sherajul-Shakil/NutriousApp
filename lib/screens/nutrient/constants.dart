@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 String baseUrl = 'https://nutritionapiv2.herokuapp.com/test/q?name=';
 String baseUrlV1 = 'https://nutrition-app-ssm.herokuapp.com/test/';
@@ -66,3 +67,7 @@ const List<BoxShadow> buttonBoxShadowColor = [
     offset: Offset(-4, -4), // Shadow position
   ),
 ];
+
+final stateValue = StateProvider<int>((ref) {
+  return 0;
+});
