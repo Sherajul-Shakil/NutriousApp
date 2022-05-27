@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nutrious_web_app/screens/bmi/calculator_brain.dart';
 import 'package:nutrious_web_app/screens/bmi/components/bottom_button.dart';
@@ -28,54 +29,24 @@ class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('BMI CALCULATOR'),
-        centerTitle: true,
-        backgroundColor: Color(0xFFEB1555),
-        automaticallyImplyLeading: false,
-      ),
+      // appBar: AppBar(
+      //   title: Text('BMI CALCULATOR'),
+      //   centerTitle: true,
+      //   backgroundColor: Color(0xFFEB1555),
+      //   automaticallyImplyLeading: false,
+      // ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 300),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            // Expanded(
-            //     child: Row(
-            //   children: <Widget>[
-            //     Expanded(
-            //       child: ReusableCard(
-            //         onPress: () {
-            //           setState(() {
-            //             selectedGender = Gender.male;
-            //           });
-            //         },
-            //         colour: selectedGender == Gender.male
-            //             ? kActiveCardColour
-            //             : kInactiveCardColour,
-            //         cardChild: IconContent(
-            //           icon: Icons.male,
-            //           label: 'MALE',
-            //         ),
-            //       ),
-            //     ),
-            //     Expanded(
-            //       child: ReusableCard(
-            //         onPress: () {
-            //           setState(() {
-            //             selectedGender = Gender.female;
-            //           });
-            //         },
-            //         colour: selectedGender == Gender.female
-            //             ? kActiveCardColour
-            //             : kInactiveCardColour,
-            //         cardChild: IconContent(
-            //           icon: Icons.female,
-            //           label: 'FEMALE',
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // )),
+            Text(
+              "Calculate Your BMI",
+              style: GoogleFonts.breeSerif(
+                fontSize: 32,
+                color: Colors.green[900],
+              ),
+            ),
             Expanded(
               child: ReusableCard(
                 colour: kActiveCardColour,
@@ -107,10 +78,11 @@ class _InputPageState extends State<InputPage> {
                       ),
                       SliderTheme(
                         data: SliderTheme.of(context).copyWith(
-                          inactiveTrackColor: Color(0xFF8D8E98),
-                          activeTrackColor: Colors.white,
-                          thumbColor: Color(0xFFEB1555),
-                          overlayColor: Color(0x29EB1555),
+                          inactiveTrackColor:
+                              Color.fromARGB(255, 255, 255, 255),
+                          activeTrackColor: Colors.green.shade700,
+                          thumbColor: Colors.green.shade700,
+                          overlayColor: Colors.green.shade200,
                           thumbShape:
                               RoundSliderThumbShape(enabledThumbRadius: 15.0),
                           overlayShape:

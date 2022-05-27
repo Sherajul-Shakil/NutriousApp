@@ -18,11 +18,15 @@ class BottomButton extends StatelessWidget {
             style: kLargeButtonTextStyle,
           ),
         ),
-        color: kBottomContainerColour,
+
         margin: EdgeInsets.only(top: 10.0),
         //padding: EdgeInsets.only(bottom: 10.0),
-        width: double.infinity,
+        width: 200,
         height: kBottomContainerHeight,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(40),
+          color: kBottomContainerColour,
+        ),
       ),
     );
   }

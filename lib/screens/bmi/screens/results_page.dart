@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrious_web_app/screens/bmi/components/bottom_button.dart';
 
 import 'package:nutrious_web_app/screens/bmi/components/reusable_card.dart';
@@ -23,12 +24,12 @@ class ResultsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('BMI CALCULATOR'),
-        centerTitle: true,
-        backgroundColor: Color(0xFFEB1555),
-        automaticallyImplyLeading: false,
-      ),
+      // appBar: AppBar(
+      //   title: Text('BMI CALCULATOR'),
+      //   centerTitle: true,
+      //   backgroundColor: Color(0xFFEB1555),
+      //   automaticallyImplyLeading: false,
+      // ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 300),
         child: Column(
@@ -40,8 +41,11 @@ class ResultsPage extends StatelessWidget {
                 padding: EdgeInsets.all(15.0),
                 alignment: Alignment.bottomLeft,
                 child: Text(
-                  'Your Result',
-                  style: kTitleTextStyle,
+                  "Your BMI is:",
+                  style: GoogleFonts.breeSerif(
+                    fontSize: 40,
+                    color: Colors.green[900],
+                  ),
                 ),
               ),
             ),
