@@ -131,6 +131,7 @@ class _SearchPageState extends State<SearchPage> {
                   controller: nameController,
                 ),
               ),
+              //Container(child: ),
               SizedBox(height: height / 3.5),
               const Spacer(),
               const NavBar(),
