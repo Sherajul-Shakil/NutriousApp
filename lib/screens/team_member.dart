@@ -19,47 +19,58 @@ class TeamMember extends StatelessWidget {
       // ),
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            "Team Members",
-            style: GoogleFonts.breeSerif(
-              fontSize: 40,
-              color: Colors.green[900],
+          Container(
+            height: 60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40),
+              color: Colors.green.shade100,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 150),
+              child: Text(
+                "Team Members",
+                style: GoogleFonts.breeSerif(
+                  fontSize: 40,
+                  color: Colors.green[900],
+                ),
+              ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              profile(
-                imglink:
-                    "https://scontent.fdac27-1.fna.fbcdn.net/v/t39.30808-6/261987139_1160976230975804_8931723615844451955_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeEUbgjvmIZE_iEiRcZDFOlSCkqYctQNEwMKSphy1A0TAxrK79z-yt-0qCpvCwPCH6eUqpfe2EwmM79mcKo8VnGZ&_nc_ohc=3X7XXD5qKeIAX8wG32b&_nc_ht=scontent.fdac27-1.fna&oh=00_AT8X3DkXMB-r3eC6RbYwwo3hol4-vQuOAgjsH3YA0zbPiA&oe=628CF8AA",
-                name: "Sherajul Islam",
-                email: "sherajulhakil@gmail.com",
-                versity: "Patuakhali Science and Technology University",
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              profile(
-                imglink:
-                    "https://scontent.fdac27-2.fna.fbcdn.net/v/t39.30808-6/261944603_1602763020065569_8487732182862717382_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=174925&_nc_eui2=AeGolyts0fqQ7dKpMLXe8PitjEYo5ws3oiuMRijnCzeiKxArDSdEpCRCPPtysF2YfehfA92ABfbfvuclEMOXdSXS&_nc_ohc=N44hh48AJyQAX9hm0Km&_nc_ht=scontent.fdac27-2.fna&oh=00_AT-w-YWy5NBWClsBDNEf0hDg3tZ7fMLqFTT5d4kistOxJQ&oe=628B3719",
-                name: "Maruf Hossain",
-                email: "maruf@gmail.com",
-                versity: "Patuakhali Science and Technology University",
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              profile(
-                imglink:
-                    "https://scontent.fdac27-1.fna.fbcdn.net/v/t39.30808-6/271122007_3340634456222888_3011377110959550127_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=174925&_nc_eui2=AeGbx-vV5ooZkPGVz-WdNUTNsE7cPsxUILWwTtw-zFQgtWHqn6ENJB0MZKhuCCW1NQoWFCh5E8WJ7bcg0Gkz0OFz&_nc_ohc=L0HOkI5pO8gAX9V17pz&_nc_ht=scontent.fdac27-1.fna&oh=00_AT_G2L1NHsMRY3LVE4-cCp3UMEbn6za80zD6WxwqDzn5Yg&oe=628CF75D",
-                name: "Shadik Faysal",
-                email: "shadik@gmail.com",
-                versity: "Patuakhali Science and Technology University",
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 150),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                profile(
+                  imglink: "images/shakil.jpg",
+                  name: "Sherajul Islam",
+                  email: "sherajulshakil14@cse.pstu.ac.bd",
+                  versity: "Patuakhali Science and Technology University",
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                profile(
+                  imglink: "images/maruf.jpg",
+                  name: "Maruf Hossain",
+                  email: "maruf14@cse.pstu.ac.bd",
+                  versity: "Patuakhali Science and Technology University",
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                profile(
+                  imglink: "images/shadik.jpg",
+                  name: "Shadik Faysal",
+                  email: "shadik14@cse.pstu.ac.bd",
+                  versity: "Patuakhali Science and Technology University",
+                ),
+              ],
+            ),
           ),
           Spacer(),
           const Padding(
@@ -96,9 +107,9 @@ class profile extends StatelessWidget {
         Center(
           child: ClipOval(
             child: Image(
-              height: 350.0,
-              width: 350.0,
-              image: NetworkImage(imglink),
+              height: 300.0,
+              width: 300.0,
+              image: AssetImage(imglink),
               //AssetImage('assets/images/profile_pic.jpg'),
               fit: BoxFit.cover,
             ),
@@ -110,7 +121,7 @@ class profile extends StatelessWidget {
           style: const TextStyle(
             color: Color.fromARGB(255, 0, 0, 0),
             fontWeight: FontWeight.bold,
-            fontSize: 40.0,
+            fontSize: 30.0,
           ),
         ),
         const SizedBox(height: 5),

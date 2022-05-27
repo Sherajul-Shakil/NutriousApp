@@ -16,7 +16,7 @@ class ResultsPage extends StatelessWidget {
     required this.tips,
   });
 
-  final String bmiResult;
+  final double bmiResult;
   final String resultText;
   final String interpretation;
   final int tips;
@@ -53,34 +53,57 @@ class ResultsPage extends StatelessWidget {
               flex: 5,
               child: ReusableCard(
                 colour: kActiveCardColour,
-                cardChild: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    // Text(
-                    //   resultText.toUpperCase(),
-                    //   style: kResultTextStyle,
-                    // ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          bmiResult,
-                          style: kBMITextStyle,
-                        ),
-                        Text(
-                          'Calorie',
-                          style: kLabelTextStyle,
-                        )
-                      ],
-                    ),
-                    // Text(
-                    //   interpretation,
-                    //   textAlign: TextAlign.center,
-                    //   style: kBodyTextStyle,
-                    // ),
-                  ],
+                cardChild: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 200),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      // Text(
+                      //   resultText.toUpperCase(),
+                      //   style: kResultTextStyle,
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   crossAxisAlignment: CrossAxisAlignment.end,
+                      //   children: [
+                      //     Text(
+                      //       bmiResult.toStringAsFixed(1),
+                      //       style: kBMITextStyle,
+                      //     ),
+                      //     Text(
+                      //       'Calorie',
+                      //       style: kLabelTextStyle,
+                      //     )
+                      //   ],
+                      // ),
+                      Text(
+                        'Minimum : ${(bmiResult).toStringAsFixed(1)} Calorie',
+                        textAlign: TextAlign.center,
+                        style: kBodyTextStyle,
+                      ),
+                      Text(
+                        'Sedentary : ${(bmiResult * 1.2).toStringAsFixed(1)} Calorie',
+                        textAlign: TextAlign.center,
+                        style: kBodyTextStyle,
+                      ),
+                      Text(
+                        'Light Activity : ${(bmiResult * 1.375).toStringAsFixed(1)} Calorie',
+                        textAlign: TextAlign.center,
+                        style: kBodyTextStyle,
+                      ),
+                      Text(
+                        'Moderate Activity : ${(bmiResult * 1.55).toStringAsFixed(1)} Calorie',
+                        textAlign: TextAlign.center,
+                        style: kBodyTextStyle,
+                      ),
+                      Text(
+                        'Very Active : ${(bmiResult * 1.9).toStringAsFixed(1)} Calorie',
+                        textAlign: TextAlign.center,
+                        style: kBodyTextStyle,
+                      ),
+                    ],
+                  ),
                 ),
                 onPress: () {},
               ),

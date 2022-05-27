@@ -16,13 +16,14 @@ class CalculatorBrain {
 
   late double _bmr;
 
-  String calculateBMR() {
+  double calculateBMR() {
     if (isMale) {
       _bmr = 66 + (13.7 * weight) + (5 * height) - (6.8 * age);
     } else {
       _bmr = 655 + (9.6 * weight) + (1.8 * height) - (4.7 * age);
     }
-    return _bmr.toStringAsFixed(1);
+    return _bmr;
+    //.toStringAsFixed(1)
   }
 
   String getResult() {
