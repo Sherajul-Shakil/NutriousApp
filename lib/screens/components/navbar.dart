@@ -44,10 +44,10 @@ class _NavBarState extends ConsumerState<NavBar> {
           duration: const Duration(milliseconds: 900), // tab animation duration
           gap: 8, // the tab button gap between icon and text
           color: Colors.grey[800], // unselected icon color
-          activeColor: Colors.purple, // selected icon and text color
+          activeColor: Colors.green.shade900, // selected icon and text color
           iconSize: 24, // tab button icon size
-          tabBackgroundColor:
-              Colors.purple.withOpacity(0.1), // selected tab background color
+          tabBackgroundColor: Colors.green.shade900
+              .withOpacity(0.1), // selected tab background color
           padding: const EdgeInsets.symmetric(
               horizontal: 20, vertical: 5), // navigation bar padding
           tabs: [

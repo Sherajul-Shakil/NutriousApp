@@ -1,11 +1,21 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:nutrious_web_app/model/nutrition_data.dart';
 import 'package:nutrious_web_app/screens/components/navbar.dart';
 import 'package:nutrious_web_app/screens/nutrient/constants.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:nutrious_web_app/screens/nutrient/model.dart';
 import 'package:nutrious_web_app/screens/nutrient/result.dart';
+import 'package:nutrious_web_app/screens/nutrient/model.dart';
+import 'package:path/path.dart';
+import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -15,18 +25,6 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  double? sugar;
-  double? fiber;
-  double? size;
-  double? sodium;
-  String? name;
-  double? potassium;
-  double? fatSaturated;
-  double? fatTotal;
-  double? calories;
-  double? cholesterol;
-  double? protein;
-  double? carbohydrate;
   bool isLoading = false;
 
   final nameController = TextEditingController();
@@ -43,17 +41,18 @@ class _SearchPageState extends State<SearchPage> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Get Nutrition"),
-        centerTitle: true,
-        backgroundColor: Color(0xFFEB1555),
-        automaticallyImplyLeading: false,
-      ),
+      // appBar: AppBar(
+      //   title: const Text("Get Nutrition"),
+      //   centerTitle: true,
+      //   backgroundColor: const Color(0xFFEB1555),
+      //   automaticallyImplyLeading: false,
+      // ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 300, vertical: 10),
           child: Column(
             children: [
+              const SizedBox(height: 10),
               Row(
                 children: [
                   Text(
@@ -65,7 +64,7 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -131,8 +130,61 @@ class _SearchPageState extends State<SearchPage> {
                   controller: nameController,
                 ),
               ),
-              //Container(child: ),
-              SizedBox(height: height / 3.5),
+              ChangeNotifierProvider<MyProvider>(
+                create: (context) => MyProvider(),
+                child: Consumer<MyProvider>(
+                  builder: (context, provider, child) {
+                    return Column(
+                      children: [
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          "Search with Image",
+                          style: GoogleFonts.breeSerif(
+                            fontSize: 32,
+                            color: Colors.green[900],
+                          ),
+                        ),
+                        if (provider.image != null)
+                          Image.network(
+                            provider.image!.path,
+                            height: 200,
+                            width: 200,
+                          ),
+                        if (provider.image == null)
+                          IconButton(
+                            onPressed: () async {
+                              var image = await ImagePicker()
+                                  .getImage(source: ImageSource.gallery);
+                              provider.setImage(image);
+                            },
+                            icon: Icon(Icons.image),
+                            iconSize: 150,
+                            color: Colors.grey,
+                          ),
+                        if (provider.image != null)
+                          TextButton(
+                            onPressed: () async {
+                              if (provider.image == null) return;
+                              await provider.makePostRequest();
+
+                              print(provider.responseData?.toString());
+                            },
+                            child: Text(
+                              "Show Nutrition Value",
+                              style: GoogleFonts.breeSerif(
+                                fontSize: 20,
+                                color: Colors.green[900],
+                              ),
+                            ),
+                          )
+                      ],
+                    );
+                  },
+                ),
+              ),
+              //SizedBox(height: height / 3.5),
               const Spacer(),
               const NavBar(),
             ],
@@ -150,83 +202,52 @@ class Failure {
   //print(failureMessage);
 }
 
-class DetailItem extends StatelessWidget {
-  const DetailItem({
-    Key? key,
-    required this.title,
-    required this.tColor,
-    required this.loopMax,
-    required this.data,
-    required this.avatarOn,
-  }) : super(key: key);
-  final String title;
-  final Color tColor;
-  final int? loopMax;
-  final List<Item>? data;
-  final bool avatarOn;
+class MyProvider extends ChangeNotifier {
+  PickedFile? image;
+  Data2? responseData;
 
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: ExpansionTile(
-          textColor: Colors.black,
-          title: Container(
-            child: Row(
-              textBaseline: TextBaseline.ideographic,
-              crossAxisAlignment: CrossAxisAlignment.baseline,
-              children: [
-                CircleAvatar(
-                  backgroundColor: tColor,
-                  radius: 15,
-                ),
-                SizedBox(width: 15),
-                Text(
-                  title,
-                  style: GoogleFonts.breeSerif(fontSize: 20),
-                )
-              ],
-            ),
-          ),
-          expandedAlignment: Alignment.centerLeft,
-          collapsedBackgroundColor: Colors.white,
-          childrenPadding:
-              const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          children: [
-            for (int i = 0; i < loopMax!; i++)
-              ListTile(
-                leading: avatarOn
-                    ? CircleAvatar(
-                        backgroundColor: Colors.black87,
-                        radius: 18,
-                        child: Text(
-                          data![i].nutrientName!.toString().split(',').last,
-                          style: GoogleFonts.breeSerif(color: Colors.white),
-                        ),
-                      )
-                    : SizedBox(height: 2, width: 2),
-                title: Text(
-                  data![i].nutrientName!.toString(),
-                  style: GoogleFonts.breeSerif(
-                    fontSize: 18,
-                  ),
-                ),
-                trailing: Text(
-                  '${data![i].nutrientValue!.toString()} ${(Unit.values[data![i].unit!.index]).toString().split('.').last.toLowerCase()}',
-                  style: GoogleFonts.breeSerif(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-          ],
-        ),
+  Future setImage(img) async {
+    image = img;
+    notifyListeners();
+  }
+
+  Future makePostRequest() async {
+    String url = 'https://food-recognition-ssm.herokuapp.com/v1/';
+    var headers = {
+      //YOUR HEADERS
+    };
+    PickedFile imgFile = PickedFile(image!.path);
+
+    var stream = http.ByteStream(DelegatingStream.typed(imgFile.openRead()));
+
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+    //request.headers.addAll(headers);
+    Uint8List data = await image!.readAsBytes();
+
+    int length = data.length;
+
+    List<int> list = data.cast();
+    // request.files.add(
+    //     http.MultipartFile.fromBytes('image', list, filename: 'testImage.jpg'));
+    var multipartFile = http.MultipartFile(
+      'image',
+      stream,
+      length,
+      filename: basename(imgFile.path),
+      contentType: MediaType(
+        'image',
+        'png',
       ),
     );
+    request.files.add(multipartFile);
+    var response = await request.send();
+
+    //print(response.statusCode);
+    response.stream.transform(utf8.decoder).listen((value) {}).onData((data) {
+      notifyListeners();
+      //x = data;
+
+      responseData = dataFromJson(data);
+    });
   }
 }

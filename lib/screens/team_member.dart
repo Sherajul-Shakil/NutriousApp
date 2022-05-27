@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrious_web_app/screens/components/navbar.dart';
 
 class TeamMember extends StatelessWidget {
@@ -10,15 +11,23 @@ class TeamMember extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        title: const Text("Team Members"),
-        centerTitle: true,
-        backgroundColor: const Color(0xFFEB1555),
-        automaticallyImplyLeading: false,
-      ),
+      // appBar: AppBar(
+      //   title: const Text("Team Members"),
+      //   centerTitle: true,
+      //   backgroundColor: const Color(0xFFEB1555),
+      //   automaticallyImplyLeading: false,
+      // ),
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            "Team Members",
+            style: GoogleFonts.breeSerif(
+              fontSize: 40,
+              color: Colors.green[900],
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

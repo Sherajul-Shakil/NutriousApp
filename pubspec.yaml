@@ -41,6 +41,13 @@ dependencies:
   freezed_annotation: ^0.14.2
   percent_indicator: "^3.4.0"
   flutter_riverpod: ^1.0.0
+
+  image_picker_for_web: ^2.1.8
+  image_picker: ^0.8.5+3
+  provider: ^6.0.3
+  async: any
+  path: any
+  http_parser: any
   
   
 
