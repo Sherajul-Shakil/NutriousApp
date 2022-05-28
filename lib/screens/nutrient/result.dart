@@ -22,15 +22,22 @@ class _ResultPageState extends State<ResultPage> {
     // print(widget.valueHolder.toString());
     // var valueHolder;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Result"),
-        centerTitle: true,
-        backgroundColor: const Color(0xFFEB1555),
-        automaticallyImplyLeading: false,
-      ),
+      // appBar: AppBar(
+      //   title: const Text("Result"),
+      //   centerTitle: true,
+      //   backgroundColor: const Color(0xFFEB1555),
+      //   automaticallyImplyLeading: false,
+      // ),
       body: SafeArea(
         child: Column(
           children: [
+            Text(
+              "The Nutrient values are",
+              style: GoogleFonts.breeSerif(
+                fontSize: 40,
+                color: Colors.green[900],
+              ),
+            ),
             Expanded(
               child: ListView(
                 shrinkWrap: true,
@@ -142,7 +149,7 @@ class _ResultPageState extends State<ResultPage> {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 300),
               child: NavBar(),
             )
           ],

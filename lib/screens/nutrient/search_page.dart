@@ -169,16 +169,79 @@ class _SearchPageState extends State<SearchPage> {
                               if (provider.image == null) return;
                               await provider.makePostRequest();
 
-                              print(provider.responseData?.toString());
+                              print(provider.responseData?.data?.first.name);
                             },
                             child: Text(
-                              "Show Nutrition Value",
+                              "Detect Fruit",
                               style: GoogleFonts.breeSerif(
                                 fontSize: 20,
                                 color: Colors.green[900],
                               ),
                             ),
-                          )
+                          ),
+                        if (provider.responseData?.data?.first.name != null)
+                          Text(
+                            'This is ${provider.responseData?.data?.first.name}',
+                            style: GoogleFonts.breeSerif(
+                              fontSize: 20,
+                              color: Colors.red.shade700,
+                            ),
+                          ),
+                        if (provider.responseData?.data?.first.name != null)
+                          FlatButton(
+                            onPressed: () async {
+                              try {
+                                setState(() {
+                                  isLoading = true;
+                                });
+                                final http.Response response = await http.get(
+                                    Uri.parse(
+                                        'https://nutritionapiv2.herokuapp.com/test/q?name=' +
+                                            nameController.text));
+                                if (response.statusCode == 200) {
+                                  final nutritionData =
+                                      nutritionDataV2FromJson(response.body);
+
+                                  if (nutritionData != null) {
+                                    setState(() {
+                                      isLoading = false;
+                                    });
+                                  }
+                                  valueHolder = nutritionData;
+                                } else if (response.statusCode == 404) {
+                                  throw Failure(
+                                      failureMessage: 'Not Found any data!');
+                                } else {
+                                  throw Failure(
+                                      failureMessage:
+                                          'Check Internet Connection!');
+                                }
+                              } on SocketException {
+                                throw Failure(
+                                    failureMessage:
+                                        'Check Internet Connection!');
+                              }
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ResultPage(valueHolder: valueHolder)),
+                              );
+                            },
+                            child: Text(
+                              "View Nutrients",
+                              style: GoogleFonts.breeSerif(
+                                fontSize: 20,
+                                color: Colors.green[900],
+                              ),
+                            ),
+                            color: Colors.green.shade100,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                              //side: BorderSide(color: Colors.red)
+                            ),
+                          ),
                       ],
                     );
                   },
