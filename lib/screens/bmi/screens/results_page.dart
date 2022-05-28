@@ -70,35 +70,35 @@ class ResultsPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: kBodyTextStyle,
                     ),
-                    GestureDetector(
-                      child: Container(
-                        child: Text('Get more tips'),
-                      ),
-                      onTap: () {
-                        if (tips == 1) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => FatTips(),
-                            ),
-                          );
-                        } else if (tips == 2) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HealthTips(),
-                            ),
-                          );
-                        } else {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ThinTips(),
-                            ),
-                          );
-                        }
-                      },
-                    )
+                    // GestureDetector(
+                    //   child: Container(
+                    //     child: Text('Get more tips'),
+                    //   ),
+                    //   onTap: () {
+                    //     if (tips == 1) {
+                    //       Navigator.push(
+                    //         context,
+                    //         MaterialPageRoute(
+                    //           builder: (context) => FatTips(),
+                    //         ),
+                    //       );
+                    //     } else if (tips == 2) {
+                    //       Navigator.push(
+                    //         context,
+                    //         MaterialPageRoute(
+                    //           builder: (context) => HealthTips(),
+                    //         ),
+                    //       );
+                    //     } else {
+                    //       Navigator.push(
+                    //         context,
+                    //         MaterialPageRoute(
+                    //           builder: (context) => ThinTips(),
+                    //         ),
+                    //       );
+                    //     }
+                    //   },
+                    // )
                   ],
                 ),
                 onPress: () {},

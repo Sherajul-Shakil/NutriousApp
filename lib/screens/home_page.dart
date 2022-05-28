@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrious_web_app/screens/components/navbar.dart';
+import 'package:nutrious_web_app/screens/nutrient/home_component/home_navbar.dart';
 import 'package:nutrious_web_app/screens/nutrient/home_component/one.dart';
 import 'package:nutrious_web_app/screens/nutrient/home_component/section_four.dart';
 import 'package:nutrious_web_app/screens/nutrient/home_component/section_three.dart';
@@ -19,17 +21,21 @@ class _HomePageState extends State<HomePage> {
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        title: const Text("Nutrious Website"),
-        centerTitle: true,
-        backgroundColor: Colors.green.shade100,
-        automaticallyImplyLeading: false,
-      ),
+      // appBar: AppBar(
+      //   title: Text(
+      //     "HealthyFit",
+      //     style: GoogleFonts.breeSerif(
+      //       fontSize: 30,
+      //       color: Colors.white70,
+      //     ),
+      //   ),
+      //   centerTitle: true,
+      //   backgroundColor: Colors.green.shade200,
+      //   automaticallyImplyLeading: false,
+      // ),
       body: ListView(
-        // mainAxisAlignment: MainAxisAlignment.start,
-        // crossAxisAlignment: CrossAxisAlignment.center,
-
         children: [
+          HomeNavbar(width: width),
           one(height: height),
           const SizedBox(height: 100),
           const SectionTwo(),
@@ -39,6 +45,9 @@ class _HomePageState extends State<HomePage> {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 200),
             child: NavBar(),
+          ),
+          const SizedBox(
+            height: 10,
           ),
         ],
       ),

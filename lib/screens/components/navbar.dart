@@ -21,7 +21,7 @@ class _NavBarState extends ConsumerState<NavBar> {
   @override
   Widget build(BuildContext context) {
     final selectedIndex = ref.watch(stateValue);
-    print(selectedIndex);
+    //print(selectedIndex);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,8 +33,9 @@ class _NavBarState extends ConsumerState<NavBar> {
           hoverColor: Colors.grey.shade800, // tab button hover color
           haptic: true, // haptic feedback
           tabBorderRadius: 15,
-          tabActiveBorder:
-              Border.all(color: Colors.black, width: 1), // tab button border
+          tabActiveBorder: Border.all(
+              color: Color.fromARGB(255, 41, 39, 39),
+              width: 1), // tab button border
           tabBorder:
               Border.all(color: Colors.grey, width: 1), // tab button border
           tabShadow: [
@@ -62,7 +63,7 @@ class _NavBarState extends ConsumerState<NavBar> {
               },
             ),
             GButton(
-              icon: Icons.favorite_outline,
+              icon: Icons.food_bank,
               text: 'Nutrient',
               onPressed: () {
                 Navigator.push(
@@ -92,7 +93,7 @@ class _NavBarState extends ConsumerState<NavBar> {
               },
             ),
             GButton(
-              icon: Icons.card_membership,
+              icon: Icons.group,
               text: 'Team Member',
               onPressed: () {
                 Navigator.push(
@@ -106,9 +107,6 @@ class _NavBarState extends ConsumerState<NavBar> {
           onTabChange: (index) {
             ref.read(stateValue.notifier).state = index;
           },
-        ),
-        const SizedBox(
-          height: 10,
         ),
       ],
     );

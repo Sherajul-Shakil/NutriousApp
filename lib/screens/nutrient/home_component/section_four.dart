@@ -63,7 +63,7 @@ class SectionFour extends StatelessWidget {
                         children: [
                           ClipOval(
                             child: Image.asset(
-                              "images/shakil.jpg",
+                              "images/comment1.jpg",
                               height: 100,
                               width: 100,
                             ),
@@ -106,7 +106,7 @@ class SectionFour extends StatelessWidget {
                         children: [
                           ClipOval(
                             child: Image.asset(
-                              "images/maruf.jpg",
+                              "images/comment2.jpg",
                               height: 100,
                               width: 100,
                             ),

@@ -41,12 +41,6 @@ class _SearchPageState extends State<SearchPage> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("Get Nutrition"),
-      //   centerTitle: true,
-      //   backgroundColor: const Color(0xFFEB1555),
-      //   automaticallyImplyLeading: false,
-      // ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 300, vertical: 10),
@@ -77,7 +71,7 @@ class _SearchPageState extends State<SearchPage> {
                 ),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'Search By any food name',
+                    labelText: 'Search By any fruit name',
                     labelStyle: GoogleFonts.breeSerif(
                       fontSize: 16,
                       color: Colors.green[900],
@@ -159,9 +153,9 @@ class _SearchPageState extends State<SearchPage> {
                                   .getImage(source: ImageSource.gallery);
                               provider.setImage(image);
                             },
-                            icon: Icon(Icons.image),
+                            icon: const Icon(Icons.image_rounded),
                             iconSize: 150,
-                            color: Colors.grey,
+                            color: Color.fromARGB(255, 94, 143, 97),
                           ),
                         if (provider.image != null)
                           TextButton(

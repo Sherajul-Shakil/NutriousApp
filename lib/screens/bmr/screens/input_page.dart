@@ -43,7 +43,7 @@ class _InputPageState extends State<InputPageBMR> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              "Calculate Your MBR",
+              "Calculate Your BMR",
               style: GoogleFonts.breeSerif(
                 fontSize: 40,
                 color: Colors.green[900],
@@ -270,7 +270,10 @@ class _InputPageState extends State<InputPageBMR> {
             const SizedBox(
               height: 10,
             ),
-            NavBar()
+            const NavBar(),
+            const SizedBox(
+              height: 10,
+            ),
           ],
         ),
       ),

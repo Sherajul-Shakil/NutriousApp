@@ -77,6 +77,9 @@ class TeamMember extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 300),
             child: NavBar(),
           ),
+          const SizedBox(
+            height: 10,
+          ),
         ],
       ),
     ));

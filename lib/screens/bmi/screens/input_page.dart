@@ -229,7 +229,10 @@ class _InputPageState extends State<InputPage> {
             const SizedBox(
               height: 10,
             ),
-            NavBar()
+            const NavBar(),
+            const SizedBox(
+              height: 10,
+            ),
           ],
         ),
       ),
